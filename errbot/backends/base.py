@@ -599,6 +599,10 @@ class Backend(object):
                     'about that specific command.'
     MSG_HELP_UNDEFINED_COMMAND = 'That command is not defined.'
 
+    # This attribute defines what attribute on an Identifier will be
+    # checked when making decisions about ACLs.
+    ACL_IDENTIFIER_ATTRIBUTE = 'person'
+
     def __init__(self, config):
         """ Those arguments will be directly those put in BOT_IDENTITY
         """
@@ -919,7 +923,7 @@ class Backend(object):
 
         Raises ACLViolation() if the command may not be executed in the given context
         """
-        usr = str(mess.frm.person)
+        usr = str(getattr(mess.frm, self.ACL_IDENTIFIER_ATTRIBUTE))
         typ = mess.type
 
         if cmd not in self.bot_config.ACCESS_CONTROLS:

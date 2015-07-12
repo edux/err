@@ -133,6 +133,8 @@ class SlackMUCOccupant(SlackIdentifier):
 
 class SlackBackend(ErrBot):
 
+    ACL_IDENTIFIER_ATTRIBUTE = 'nick'
+
     def __init__(self, config):
         super().__init__(config)
         identity = config.BOT_IDENTITY
